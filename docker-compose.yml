@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  frontend:
+    image: nginx:1.19
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./frontend/build/distributions:/etc/nginx/html
+  backend:
+    image: openjdk:11-jdk
+    ports:
+      - 8080:8080
+    volumes:
+      - ./backend/build/libs:/etc
+    command: java -jar /etc/backend.jar
